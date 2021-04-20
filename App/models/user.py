@@ -5,8 +5,8 @@ import datetime
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    first_name =  db.Column(db.String, nullable=False)
-    last_name =  db.Column(db.String, nullable=False)
+    first_name =  db.Column(db.String, nullable=True)
+    last_name =  db.Column(db.String, nullable=True)
 
     def toDict(self):
         return{

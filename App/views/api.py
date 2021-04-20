@@ -1,8 +1,8 @@
 from flask import Blueprint, redirect, render_template, request
 
 api_views = Blueprint('api_views', __name__, template_folder='../templates')
-from App.controllers import ( create_user, SignUp )
-@api_views.route('/', methods=['GET'])
+from App.controllers import ( create_user, SignUp, signupAction )
+@api_views.route('/status', methods=['GET'])
 def get_api_docs():
     return render_template('index.html')
 
@@ -10,3 +10,12 @@ def get_api_docs():
 def signup():
   form = SignUp() # create form object
   return render_template('signup.html', form=form) # pass form object to template
+
+@api_views.route('/')
+def index():
+  return render_template('login.html')
+
+@api_views.route('/signup', methods=['POST'])
+def signupAction1():
+  signupAction()
+  return 'Created'
