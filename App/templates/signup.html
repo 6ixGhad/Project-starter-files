@@ -2,9 +2,12 @@
 {% block title %}Sign Up{% endblock %}
 {% block page %}Sign Up{% endblock %}
 
+from App.controllers import user
+
 {{ super() }}
 
 {% block content %}
+form = SignUp()
  <div class="row">
       <div class="row">
         <form id="myForm" class="col s12 m8 offset-m2" method="POST" action="/signup">
