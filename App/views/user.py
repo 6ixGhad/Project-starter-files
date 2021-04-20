@@ -3,11 +3,17 @@ from flask import Blueprint, redirect, render_template, request, jsonify, send_f
 user_views = Blueprint('user_views', __name__, template_folder='../templates')
 
 from App.models import User
+from App.controllers import ( create_user, SignUp, signupAction )
 
 @user_views.route('/users', methods=['GET'])
 def get_user_page():
     users = User.query.all()
     return render_template('users.html', users=users)
+
+@user_views.route('/signupp', methods=['GET'])
+def signup():
+  form = SignUp() # create form object
+  return render_template('signup.html', form=form) # pass form object to template
 
 @user_views.route('/api/users')
 def client_app():
