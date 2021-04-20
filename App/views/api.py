@@ -1,7 +1,7 @@
 from flask import Blueprint, redirect, render_template, request
 
 api_views = Blueprint('api_views', __name__, template_folder='../templates')
-from App.controllers import (create_user, SignUp)
+from App.controllers import ( create_user, SignUp )
 @api_views.route('/', methods=['GET'])
 def get_api_docs():
     return render_template('index.html')
