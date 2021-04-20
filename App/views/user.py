@@ -12,8 +12,8 @@ def get_user_page():
 
 @user_views.route('/signupp', methods=['GET'])
 def signupp():
-  form = SignUp() # create form object
-  return render_template('signup.html', form=form) # pass form object to template
+  #form = SignUp() # create form object
+  return render_template('signup.html') # pass form object to template
 
 @user_views.route('/api/users')
 def client_app():
