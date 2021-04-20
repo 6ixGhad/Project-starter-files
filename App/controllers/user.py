@@ -4,7 +4,8 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, EqualTo, Email
 from wtforms.fields.html5 import EmailField
 from flask_sqlalchemy import SQLAlchemy
-db=SQLAlchemy()
+#db=SQLAlchemy()
+from App.models import db
 
 
 from App.models import ( User )
