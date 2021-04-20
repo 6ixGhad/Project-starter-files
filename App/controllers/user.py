@@ -12,7 +12,7 @@ def create_user(firstname, lastname, uwi_id, email, gender, dob):
     return 'new user'
 
 
-class SignUp(FlaskForm):
+def SignUp(FlaskForm):
     username = StringField('username', validators=[InputRequired()])
     email = EmailField('email', validators=[Email(), InputRequired()])
     password = PasswordField('New Password', validators=[InputRequired(), EqualTo('confirm', message='Passwords must match')])
