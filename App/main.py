@@ -3,13 +3,22 @@ from flask import Flask
 from flask_jwt import JWT
 from datetime import timedelta 
 from flask_uploads import UploadSet, configure_uploads, IMAGES, TEXT, DOCUMENTS
-
+from flask_login import LoginManager, current_user, login_user, login_required
+from App.models import ( User )
 from App.models import db
 
 from App.views import (
     api_views,
     user_views
 )
+
+''' Begin Flask Login Functions '''
+login_manager = LoginManager()
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
+
+''' End Flask Login Functions '''
 
 def get_db_uri(scheme='sqlite://', user='', password='', host='//demo.db', port='', name=''):
     return scheme+'://'+user+':'+password+'@'+host+':'+port+'/'+name 
@@ -42,6 +51,7 @@ def create_app():
     photos = UploadSet('photos', TEXT + DOCUMENTS + IMAGES)
     configure_uploads(app, photos)
     db.init_app(app)
+    login_manager.init_app(app)
     return app
 
 app = create_app()

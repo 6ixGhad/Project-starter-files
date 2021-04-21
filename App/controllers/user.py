@@ -4,11 +4,12 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, EqualTo, Email
 from wtforms.fields.html5 import EmailField
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager, current_user, login_user, login_required
 db=SQLAlchemy()
-#from App.models import db
 
 
 from App.models import ( User )
+
 
 def create_user(firstname, lastname, uwi_id, email, gender, dob):
     # newuser = use()
@@ -46,8 +47,8 @@ def loginAction():
       data = request.form
       user = User.query.filter_by(username = data['username']).first()
       if user and user.check_password(data['password']): # check credentials
-        #flash('Logged in successfully.') # send message to next page
+        flash('Logged in successfully.') # send message to next page
         login_user(user) # login the user
-        #return redirect(url_for('todos')) # redirect to main page if login successful
-  #flash('Invalid credentials')
-  return ("Logged in")
+        return redirect(url_for('api_views.get_api_docs')) # redirect to main page if login successful
+  flash('Invalid credentials')
+  return redirect(url_for('api_views.index'))
