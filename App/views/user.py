@@ -10,10 +10,15 @@ def get_user_page():
     users = User.query.all()
     return render_template('users.html', users=users)
 
-@user_views.route('/signupp', methods=['GET'])
+@user_views.route('/register', methods=['GET'])
 def signupp():
   #form = SignUp() # create form object
   return render_template('signup.html') # pass form object to template
+
+@user_views.route('/register', methods=['POST'])
+def signupAction2():
+  signupAction()
+  return 'Created'
 
 @user_views.route('/api/users')
 def client_app():

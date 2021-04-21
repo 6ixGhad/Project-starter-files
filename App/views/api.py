@@ -7,6 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 api_views = Blueprint('api_views', __name__, template_folder='../templates')
 from App.controllers import ( create_user, SignUp, signupAction )
+
 @api_views.route('/status', methods=['GET'])
 def get_api_docs():
     return render_template('index.html')
