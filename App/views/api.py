@@ -34,5 +34,5 @@ def loginAction1():
 
 @api_views.route('/signup', methods=['POST'])
 def signupAction1():
-  signupAction()
-  return 'Created'
+  result = signupAction()
+  return result
