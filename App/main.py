@@ -30,6 +30,7 @@ def loadConfig(app):
         SQLITEDB = os.environ.get("SQLITEDB", default="true")
         app.config['ENV'] = os.environ.get("ENV")
         app.config['SQLALCHEMY_DATABASE_URI'] = get_db_uri() if SQLITEDB in {'True', 'true', 'TRUE'} else DBURI
+        app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 
 def create_app():
     app = Flask(__name__, static_url_path='/static')
