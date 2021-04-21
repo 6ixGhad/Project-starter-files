@@ -18,7 +18,7 @@ def loadConfig(app):
     #try to load config from file, if fails then try to load from environment
     try:
         app.config.from_object('App.config')
-        app.config['SQLALCHEMY_DATABASE_URI'] = get_db_uri() if app.config['SQLITEDB'] else app.config['DBURI']
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://kosnujrrfaxywn:57eace331afddfae8f69fc0f27c255ef46c4d7cd6a6401d1634236cff693d22a@ec2-34-206-8-52.compute-1.amazonaws.com:5432/de4ru3u11bk7qo' if app.config['SQLITEDB'] else app.config['DBURI']
     except:
         print("config file not present using environment variables")
         # DBUSER = os.environ.get("DBUSER")
