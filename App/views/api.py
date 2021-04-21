@@ -30,6 +30,7 @@ def index():
 @api_views.route('/login', methods=['POST'])
 def loginAction1():
   loginAction()
+  return {{ current_user.username }}
 
 @api_views.route('/signup', methods=['POST'])
 def signupAction1():
