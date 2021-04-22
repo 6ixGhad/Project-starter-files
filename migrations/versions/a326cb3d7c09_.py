@@ -24,6 +24,7 @@ def upgrade():
     op.create_unique_constraint(None, 'user', ['email'])
     #op.create_unique_constraint(None, 'user', ['username'])
     op.drop_column('player', 'form')
+    op.drop_column('player', 'form')
     #op.drop_column('user', 'first_name')
     # ### end Alembic commands ###
 

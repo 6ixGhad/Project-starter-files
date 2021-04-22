@@ -11,7 +11,7 @@ class Player(db.Model):
     second_name= db.Column(db.String(80), nullable=False)
     assists= db.Column(db.Integer, nullable=False)
     clean_sheets= db.Column(db.Integer, nullable=False)
-    form= db.Column(db.Integer, nullable=False)
+    form= db.Column(db.Integer, nullable=True)
     goals_conceded= db.Column(db.Integer, nullable=False)
     goals_scored= db.Column(db.Integer, nullable=False)
     minutes= db.Column(db.Integer, nullable=False)
