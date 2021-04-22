@@ -26,7 +26,7 @@ def initDB():
     print('database initialized!')
 
 def get_db_uri(scheme='sqlite://', user='', password='', host='//demo.db', port='', name=''):
-    return scheme+'://'+user+':'+password+'@'+host+':'+port+'/'+name 
+    return 'postgres://kosnujrrfaxywn:57eace331afddfae8f69fc0f27c255ef46c4d7cd6a6401d1634236cff693d22a@ec2-34-206-8-52.compute-1.amazonaws.com:5432/de4ru3u11bk7qo' 
 
 def loadConfig(app):
     #try to load config from file, if fails then try to load from environment
