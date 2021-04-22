@@ -57,7 +57,7 @@ def create_app():
     configure_uploads(app, photos)
     db.init_app(app)
     login_manager.init_app(app)
-    initDB()
+    db.create_all(app=app)
     return app
 
 app = create_app()
@@ -66,7 +66,6 @@ app.app_context().push()
 
 app.register_blueprint(api_views)
 app.register_blueprint(user_views)
-initDB()
 
 ''' Set up JWT here (if using flask JWT)'''
 # def authenticate(uname, password):
