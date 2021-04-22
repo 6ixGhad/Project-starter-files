@@ -20,6 +20,11 @@ def load_user(user_id):
 
 ''' End Flask Login Functions '''
 
+def initDB():
+    #db.drop_all(app=app)
+    db.create_all(app=app)
+    print('database initialized!')
+
 def get_db_uri(scheme='sqlite://', user='', password='', host='//demo.db', port='', name=''):
     return scheme+'://'+user+':'+password+'@'+host+':'+port+'/'+name 
 
@@ -60,6 +65,7 @@ app.app_context().push()
 
 app.register_blueprint(api_views)
 app.register_blueprint(user_views)
+initDB()
 
 ''' Set up JWT here (if using flask JWT)'''
 # def authenticate(uname, password):
