@@ -11,13 +11,12 @@ class Player(db.Model):
     second_name= db.Column(db.String(80), nullable=False)
     assists= db.Column(db.Integer, nullable=False)
     clean_sheets= db.Column(db.Integer, nullable=False)
-    #form= db.Column(db.String, nullable=False)
     goals_conceded= db.Column(db.Integer, nullable=False)
     goals_scored= db.Column(db.Integer, nullable=False)
     minutes= db.Column(db.Integer, nullable=False)
     penalties_saved= db.Column(db.Integer, nullable=False)
     red_cards= db.Column(db.Integer, nullable=False)
-    saves= db.Column(db.Integer, nullable=False)
+    saves= db.Column(db.String, nullable=False)
     yellow_cards= db.Column(db.Integer, nullable=False)
 
 
