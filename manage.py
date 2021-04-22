@@ -6,7 +6,7 @@ from App.models import db
 manager = Manager(app)
 migrate = Migrate(app, db)
 
-from App.models import User, Player
+from App.models import User
 
 # add migrate command
 manager.add_command('db', MigrateCommand)
@@ -14,7 +14,7 @@ manager.add_command('db', MigrateCommand)
 # initDB command
 @manager.command
 def initDB():
-    db.drop_all(app=app)
+    #db.drop_all(app=app)
     db.create_all(app=app)
     print('database initialized!')
 
