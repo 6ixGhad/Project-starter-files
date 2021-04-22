@@ -23,7 +23,7 @@ def upgrade():
     #op.add_column('user', sa.Column('username', sa.String(length=80), nullable=False))
     op.create_unique_constraint(None, 'user', ['email'])
     #op.create_unique_constraint(None, 'user', ['username'])
-    #op.drop_column('user', 'last_name')
+    op.drop_column('player', 'form')
     #op.drop_column('user', 'first_name')
     # ### end Alembic commands ###
 
