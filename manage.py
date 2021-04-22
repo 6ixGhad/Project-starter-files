@@ -14,7 +14,7 @@ manager.add_command('db', MigrateCommand)
 # initDB command
 @manager.command
 def initDB():
-    db.drop_all(app=app)
+    #db.drop_all(app=app)
     db.create_all(app=app)
     print('database initialized!')
 
@@ -26,12 +26,9 @@ def serve():
 
 @manager.command
 def make_users():
-    bob = User(first_name="Bob", last_name="Smith")
-    sally = User(first_name="Sally", last_name="Smith")
-    rob = User(first_name="Rob", last_name="Smith")
-    db.session.add(bob)
-    db.session.add(sally)
-    db.session.add(rob)
+    jerry = User(username="jerry", email="jerry@mail.com")
+    jerry.set_password('1234')
+    db.session.add(jerry)
     db.session.commit()
     print("users created")
 
