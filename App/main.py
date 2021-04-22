@@ -57,6 +57,7 @@ def create_app():
     configure_uploads(app, photos)
     db.init_app(app)
     login_manager.init_app(app)
+    initDB()
     return app
 
 app = create_app()
