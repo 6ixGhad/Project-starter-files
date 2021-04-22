@@ -8,7 +8,7 @@ from flask_login import LoginManager, current_user, login_user, login_required, 
 db=SQLAlchemy()
 
 
-from App.models import ( User, Player )
+from App.models import ( User, Player, Collection )
 
 
 def create_user(firstname, lastname, uwi_id, email, gender, dob):
@@ -83,6 +83,32 @@ def addplayerAction():
     db.session.add(allPlayers)
     db.session.commit()
     flash('Player Created!') # send message
-    return redirect(url_for('user_views.get_players')) # redirect
+    return redirect(url_for('api_views.get_players1')) # redirect
   flash('Invalid data!')
-  return redirect(url_for('user_views.get_players')) # redirect
+  return redirect(url_for('api_views.get_players1')) # redirect
+
+def get_players():
+   players = Player.query.all()
+   if players is None:
+       players = []
+   form = AddPlayer()
+   return render_template('players.html', form=form, players=players) # pass the form and the user's todo objects to the template
+
+def add_to_action(id):
+  count = 1
+  search = id
+  row = Player.query.filter_by(id=search).first() # query  players
+  #myCollection= Collection(id=count, first_name=row.first_name, second_name=row.second_name)
+  myCollection= Collection(id=id, collectionid= current_user.id, first_name=row.first_name, second_name=row.second_name, assists=row.assists, clean_sheets=row.clean_sheets, form=row.form, goals_conceded=row.goals_conceded, goals_scored=row.goals_scored ,minutes=row.minutes,penalties_saved=row.penalties_saved,red_cards=row.red_cards,yellow_cards=row.yellow_cards)
+  db.session.add(myCollection)
+  db.session.commit()
+  count += 1
+  flash('Collection Updated!')
+  return redirect(url_for('api_views.get_players1'))
+
+def get_collection():
+  collections = Collection.query.filter_by(collectionid=current_user.id).all()
+  if collections is None:
+      collections = []
+  form = AddPlayer()
+  return render_template('collection.html', players=collections) # pass the form and the user's todo objects to the template

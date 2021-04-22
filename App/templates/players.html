@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block title %} Players{% endblock %}
+
+{{ super() }}
+
+{% block content %}
+  {% if current_user.is_authenticated %}
+  <div class="container">
+<div class="row">
+      <table>
+        <thead>
+          <tr>
+            <td>ID</td><td>First Name</td><td>Last Name</td><td>Assists</td><td>Goals</td><td>Red Cards</td><td>Yellow Cards</td><td>Add Player</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for player in players %}
+            <tr>
+              <td>{{player.id}}</td>
+              <td>{{player.first_name}}</td>
+              <td>{{player.second_name}}</td>
+              <td>{{player.assists}}</td>
+              <td>{{player.goals_scored}}</td>
+              <td>{{player.red_cards}}</td>
+              <td>{{player.yellow_cards}}</td>
+              <td>
+                <a class="waves-effect waves-light btn" href="/addtocollection/{{player.id}}">Add to collection</a>
+              </td>
+            </tr>
+          {% endfor %}
+        <tbody>
+      </table>
+    </div>
+  </div>
+        
+  </div>
+
+  {% endif %}
+{% endblock %}

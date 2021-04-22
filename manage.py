@@ -14,7 +14,7 @@ manager.add_command('db', MigrateCommand)
 # initDB command
 @manager.command
 def initDB():
-    #db.drop_all(app=app)
+    db.drop_all(app=app)
     db.create_all(app=app)
     print('database initialized!')
 

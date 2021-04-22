@@ -8,7 +8,7 @@ from flask_login import LoginManager, current_user, login_user, login_required
 import logging
 
 api_views = Blueprint('api_views', __name__, template_folder='../templates')
-from App.controllers import ( create_user, SignUp, signupAction, LogIn, loginAction, logout, AddPlayer, addplayerAction )
+from App.controllers import ( create_user, SignUp, signupAction, LogIn, loginAction, logout, AddPlayer, addplayerAction, get_players, add_to_action, get_collection )
 
 
 @api_views.route('/status', methods=['GET'])
@@ -57,3 +57,22 @@ def addplayer():
 def addplayerAction1():
   result = addplayerAction()
   return result # redirect
+
+@api_views.route('/players', methods=['GET', 'POST'])
+@login_required
+def get_players1():
+   result = get_players()
+   return result
+
+@api_views.route('/addtocollection/<id>')
+@login_required
+def add_to_action1(id):
+  search = id
+  result = add_to_action(search)
+  return result
+
+@api_views.route('/mycollection', methods=['GET', 'POST'])
+@login_required
+def get_collection1():
+   result = get_collection()
+   return result
