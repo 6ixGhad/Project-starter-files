@@ -13,19 +13,20 @@
 
   </head>
   <body>
-    <nav class="purple">
+    <nav class="teal">
       <div class="nav-wrapper">
         <a href="#!" class="brand-logo center">{% block page %}{% endblock %}</a>
         <div class="nav-wrapper">
-            <ul id="nav-mobile" class="left">
-                <li><a href="/">Home</a></li>
-                <li><a href="/users">Users Jinja</a></li>
-                <li><a href="/static/users">Users JS</a></li>
+                           <ul id="nav-mobile" class="left">
+                <li><a href="/">Login</a></li>
             </ul>
-        </div>
+        {% if current_user.is_authenticated %}
+          <ul class="right" style="margin-top: 10px">
+            <li><a class="waves-effect waves-light btn right" href="/logout">Logout</a></li>
+          </ul>
+        {% endif %}
       </div>
     </nav>
-    
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     <nav class="white black-text" style="padding: 10px">

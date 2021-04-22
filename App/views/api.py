@@ -8,7 +8,7 @@ from flask_login import LoginManager, current_user, login_user, login_required
 import logging
 
 api_views = Blueprint('api_views', __name__, template_folder='../templates')
-from App.controllers import ( create_user, SignUp, signupAction, LogIn, loginAction )
+from App.controllers import ( create_user, SignUp, signupAction, LogIn, loginAction, logout )
 
 
 @api_views.route('/status', methods=['GET'])
@@ -39,3 +39,9 @@ def loginAction1():
 def signupAction1():
   result = signupAction()
   return result
+
+@api_views.route('/logout', methods=['GET'])
+@login_required
+def logout1():
+  result = logout()
+  return result 

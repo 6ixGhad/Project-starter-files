@@ -4,7 +4,7 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, EqualTo, Email
 from wtforms.fields.html5 import EmailField
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, current_user, login_user, login_required
+from flask_login import LoginManager, current_user, login_user, login_required, logout_user
 db=SQLAlchemy()
 
 
@@ -51,4 +51,9 @@ def loginAction():
         login_user(user) # login the user
         return redirect(url_for('api_views.get_api_docs')) # redirect to main page if login successful
   flash('Invalid credentials')
+  return redirect(url_for('api_views.index'))
+
+def logout():
+  logout_user()
+  flash('Logged Out!')
   return redirect(url_for('api_views.index'))
