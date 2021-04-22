@@ -56,7 +56,7 @@ with open('App/players_raw.csv', mode='r') as csv_file:
             count += 1
 
         else:
-            allPlayers= Player(id=count, first_name=row[first_nameP], second_name=row[second_nameP], assists=row[assistsP], clean_sheets=row[clean_sheetsP], goals_conceded=row[goals_concededP], goals_scored=row[goals_scoredP] ,minutes=row[minutesP],penalties_saved=row[penalties_savedP],red_cards=row[red_cardsP],yellow_cards=row[yellow_cardsP])
+            allPlayers= Player(id=count, first_name=row[first_nameP], second_name=row[second_nameP], assists=row[assistsP], clean_sheets=row[clean_sheetsP], form=row[formP], goals_conceded=row[goals_concededP], goals_scored=row[goals_scoredP] ,minutes=row[minutesP],penalties_saved=row[penalties_savedP],red_cards=row[red_cardsP],yellow_cards=row[yellow_cardsP])
             db.session.add(allPlayers)
             db.session.commit()
 

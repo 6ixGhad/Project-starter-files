@@ -1,6 +1,6 @@
 from flask import redirect, render_template, request, flash, session, url_for
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField
 from wtforms.validators import InputRequired, EqualTo, Email
 from wtforms.fields.html5 import EmailField
 from flask_sqlalchemy import SQLAlchemy
@@ -8,7 +8,7 @@ from flask_login import LoginManager, current_user, login_user, login_required, 
 db=SQLAlchemy()
 
 
-from App.models import ( User )
+from App.models import ( User, Player )
 
 
 def create_user(firstname, lastname, uwi_id, email, gender, dob):
@@ -27,6 +27,23 @@ class LogIn(FlaskForm):
     username = StringField('username', validators=[InputRequired()])
     password = PasswordField('New Password', validators=[InputRequired()])
     submit = SubmitField('Login', render_kw={'class': 'btn waves-effect waves-light white-text'})
+
+class AddPlayer(FlaskForm):
+  id = TextAreaField('Player ID', validators =[InputRequired()])
+  first_name = TextAreaField('First Name', validators =[InputRequired()])
+  second_name = TextAreaField('Last Name', validators =[InputRequired()])
+  assists = TextAreaField('Assists', validators =[InputRequired()])
+  clean_sheets = TextAreaField('Clean Sheets', validators =[InputRequired()])
+  form = TextAreaField('Form', validators =[InputRequired()])
+  goals_conceded = TextAreaField('Goals Conceded', validators =[InputRequired()])
+  goals_scored = TextAreaField('Goals Scored', validators =[InputRequired()])
+  minutes = TextAreaField('Minutes', validators =[InputRequired()])
+  penalties_saved = TextAreaField('Penalties Saved', validators =[InputRequired()])
+  red_cards = TextAreaField('Red Cards', validators =[InputRequired()])
+  saves = TextAreaField('Saves', validators =[InputRequired()])
+  yellow_cards = TextAreaField('Yellow Cards', validators =[InputRequired()])
+
+  submit = SubmitField('Add Player', render_kw={'class': 'btn waves-effect waves-light white-text'})
 
 def signupAction():
   form = SignUp() # create form object
@@ -57,3 +74,15 @@ def logout():
   logout_user()
   flash('Logged Out!')
   return redirect(url_for('api_views.index'))
+
+def addplayerAction():
+  form = AddPlayer()
+  if form.validate_on_submit():
+    data = request.form # get request data
+    allPlayers= Player(id=data['id'], first_name=data['first_name'], second_name=data['second_name'], assists=data['assists'], clean_sheets=data['clean_sheets'], form=data['form'], goals_conceded=data['goals_conceded'], goals_scored=data['goals_scored'] ,minutes=data['minutes'],penalties_saved=data['penalties_saved'],red_cards=data['red_cards'],yellow_cards=data['yellow_cards'])
+    db.session.add(allPlayers)
+    db.session.commit()
+    flash('Player Created!') # send message
+    return redirect(url_for('user_views.get_players')) # redirect
+  flash('Invalid data!')
+  return redirect(url_for('user_views.get_players')) # redirect

@@ -8,7 +8,7 @@ from flask_login import LoginManager, current_user, login_user, login_required
 import logging
 
 api_views = Blueprint('api_views', __name__, template_folder='../templates')
-from App.controllers import ( create_user, SignUp, signupAction, LogIn, loginAction, logout )
+from App.controllers import ( create_user, SignUp, signupAction, LogIn, loginAction, logout, AddPlayer, addplayerAction )
 
 
 @api_views.route('/status', methods=['GET'])
@@ -45,3 +45,15 @@ def signupAction1():
 def logout1():
   result = logout()
   return result 
+
+@api_views.route('/addplayer', methods=['GET'])
+@login_required
+def addplayer():
+  form = AddPlayer() # get the addToDo form
+  return render_template('addplayer.html', form=form) # pass the form to the template
+
+@api_views.route('/addplayer', methods=['POST'])
+@login_required
+def addplayerAction1():
+  result = addplayerAction()
+  return result # redirect
