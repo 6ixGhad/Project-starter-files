@@ -21,7 +21,7 @@ def initDB():
 
 @manager.command
 def init():
-    #db.drop_all(app=app)
+    db.drop_all(app=app)
     db.create_all(app=app)
     result = init()
     print(result)
