@@ -2,7 +2,7 @@ from flask import Blueprint, redirect, render_template, request, jsonify, send_f
 
 user_views = Blueprint('user_views', __name__, template_folder='../templates')
 
-from App.models import User, Player
+from App.models import User, Player, Collection
 from App.controllers import ( create_user,  )
 
 @user_views.route('/users', methods=['GET'])
@@ -20,7 +20,7 @@ def client_app():
 
 @user_views.route('/api/players')
 def get_players():
-    players = Player.query.all()
+    players = Collection.query.all()
     if not players:
         return jsonify([])
     players = [player.toDict() for player in players]

@@ -8,7 +8,7 @@ from flask_login import LoginManager, current_user, login_user, login_required
 import logging
 
 api_views = Blueprint('api_views', __name__, template_folder='../templates')
-from App.controllers import ( create_user, SignUp, signupAction, LogIn, loginAction, logout, AddPlayer, addplayerAction, get_players, add_to_action, get_collection )
+from App.controllers import ( create_user, SignUp, signupAction, LogIn, loginAction, logout, AddPlayer, addplayerAction, get_players, add_to_action, get_collection, edit, edit_action, delete_item )
 
 
 @api_views.route('/status', methods=['GET'])
@@ -76,3 +76,21 @@ def add_to_action1(id):
 def get_collection1():
    result = get_collection()
    return result
+
+@api_views.route('/update/<id>', methods=['GET'])
+@login_required
+def edit_todo(id): # get the todo id from url
+  form = edit()
+  return render_template('update.html', id=id, form=form)
+
+@api_views.route('/update/<id>', methods=['POST'])
+@login_required
+def update_action1(id):
+  result = edit_action(id)
+  return result
+
+@api_views.route('/delete/<id>', methods=['GET'])
+@login_required
+def delete(id):
+  result=delete_item(id)
+  return result 

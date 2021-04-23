@@ -45,6 +45,20 @@ class AddPlayer(FlaskForm):
 
   submit = SubmitField('Add Player', render_kw={'class': 'btn waves-effect waves-light white-text'})
 
+class edit(FlaskForm):
+  assists = TextAreaField('Assists', validators =[InputRequired()])
+  clean_sheets = TextAreaField('Clean Sheets', validators =[InputRequired()])
+  form = TextAreaField('Form', validators =[InputRequired()])
+  goals_conceded = TextAreaField('Goals Conceded', validators =[InputRequired()])
+  goals_scored = TextAreaField('Goals Scored', validators =[InputRequired()])
+  minutes = TextAreaField('Minutes', validators =[InputRequired()])
+  penalties_saved = TextAreaField('Penalties Saved', validators =[InputRequired()])
+  red_cards = TextAreaField('Red Cards', validators =[InputRequired()])
+  saves = TextAreaField('Saves', validators =[InputRequired()])
+  yellow_cards = TextAreaField('Yellow Cards', validators =[InputRequired()])
+
+  submit = SubmitField('Update', render_kw={'class': 'btn waves-effect waves-light white-text'})
+
 def signupAction():
   form = SignUp() # create form object
   if form.validate_on_submit():
@@ -112,3 +126,37 @@ def get_collection():
       collections = []
   form = AddPlayer()
   return render_template('collection.html', players=collections) # pass the form and the user's todo objects to the template
+
+def edit_action(id):
+  form = edit()
+  if form.validate_on_submit():
+    data = request.form
+    collection = Collection.query.filter_by(id=id).first() # query  todo
+    collection.assists = data['assists'] # update text
+    #player.assists = '0' # update text
+    collection.clean_sheets = data['clean_sheets'] # update text
+    collection.form = data['form'] # update text
+    collection.goals_conceded = data['goals_conceded'] # update text
+    collection.goals_scored = data['goals_scored'] # update text
+    collection.minutes = data['minutes'] # update text
+    collection.penalties_saved = data['penalties_saved'] # update text
+    collection.red_cards = data['red_cards'] # update text
+    collection.saves = data['saves'] # update text
+    collection.yellow_cards = data['yellow_cards'] # update text
+    #db.session.add(collection) # save todo
+    db.session.commit()
+    #db.session.refresh(player)
+    flash('Player Updated!')
+    return redirect(url_for('api_views.get_players1'))
+  flash('Invalid data')
+  return redirect(url_for('api_views.get_players1'))
+
+def delete_item(id):
+  collection = Collection.query.filter_by(id=id).first() # query  todo
+  if collection:
+    db.session.delete(collection)
+    db.session.commit()
+    flash('Todo Deleted!')
+    return redirect(url_for('api_views.get_players1'))
+  flash('Unauthorized or player not found')
+  return redirect(url_for('api_views.get_players1')) 
