@@ -17,12 +17,23 @@
       <div class="nav-wrapper">
         <a href="#!" class="brand-logo center">{% block page %}{% endblock %}</a>
         <div class="nav-wrapper">
-                           <ul id="nav-mobile" class="left">
-                <li><a href="/">Login</a></li>
+        {% if not current_user.is_authenticated %}
+            <ul id="nav-mobile" class="left" style="margin-top: 10px">
+                <li><a class="waves-effect waves-light btn right" href="/signup">Signup</a></li>
             </ul>
+            <ul class="right" style="margin-top: 10px">
+            <li><a class="waves-effect waves-light btn right" href="/">Login</a></li>
+          </ul>
+        {% endif %}
         {% if current_user.is_authenticated %}
           <ul class="right" style="margin-top: 10px">
             <li><a class="waves-effect waves-light btn right" href="/logout">Logout</a></li>
+          </ul>
+          <ul class="left" style="margin-top: 10px">
+            <li><a class="waves-effect waves-light btn right" href="/players">All Players</a></li>
+          </ul>
+           <ul class="left" style="margin-top: 10px">
+            <li><a class="waves-effect waves-light btn right" href="/mycollection">My Collection</a></li>
           </ul>
         {% endif %}
       </div>

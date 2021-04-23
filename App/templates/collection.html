@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
-{% block title %} Players{% endblock %}
+{% block title %}My Collection{% endblock %}
+{% block page %} {{ current_user.username }}s Collection{% endblock %}
 
 {{ super() }}
 

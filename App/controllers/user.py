@@ -104,7 +104,7 @@ def add_to_action(id):
   db.session.commit()
   count += 1
   flash('Collection Updated!')
-  return redirect(url_for('api_views.get_players1'))
+  return redirect(url_for('api_views.get_collection1'))
 
 def get_collection():
   collections = Collection.query.filter_by(collectionid=current_user.id).all()
