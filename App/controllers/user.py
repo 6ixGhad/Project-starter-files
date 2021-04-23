@@ -80,7 +80,7 @@ def loginAction():
       if user and user.check_password(data['password']): # check credentials
         flash('Logged in successfully.') # send message to next page
         login_user(user) # login the user
-        return redirect(url_for('api_views.get_api_docs')) # redirect to main page if login successful
+        return redirect(url_for('api_views.get_players1')) # redirect to main page if login successful
   flash('Invalid credentials')
   return redirect(url_for('api_views.index'))
 
