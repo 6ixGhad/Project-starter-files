@@ -125,13 +125,13 @@ def get_collection():
   if collections is None:
       collections = []
   form = AddPlayer()
-  return render_template('collection.html', players=collections) # pass the form and the user's todo objects to the template
+  return render_template('collection.html', players=collections) 
 
 def edit_action(id):
   form = edit()
   if form.validate_on_submit():
     data = request.form
-    collection = Collection.query.filter_by(id=id).first() # query  todo
+    collection = Collection.query.filter_by(id=id).first() 
     collection.assists = data['assists'] # update text
     #player.assists = '0' # update text
     collection.clean_sheets = data['clean_sheets'] # update text
@@ -143,9 +143,9 @@ def edit_action(id):
     collection.red_cards = data['red_cards'] # update text
     collection.saves = data['saves'] # update text
     collection.yellow_cards = data['yellow_cards'] # update text
-    #db.session.add(collection) # save todo
+    local_object = db.session.merge(collection)
+    db.session.add(local_object) 
     db.session.commit()
-    #db.session.refresh(player)
     flash('Player Updated!')
     return redirect(url_for('api_views.get_players1'))
   flash('Invalid data')
@@ -154,7 +154,8 @@ def edit_action(id):
 def delete_item(id):
   collection = Collection.query.filter_by(id=id).first() # query  todo
   if collection:
-    db.session.delete(collection)
+    local_object = db.session.merge(collection)
+    db.session.delete(local_object)
     db.session.commit()
     flash('Todo Deleted!')
     return redirect(url_for('api_views.get_players1'))
