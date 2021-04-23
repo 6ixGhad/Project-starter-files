@@ -3,7 +3,7 @@ from flask import Blueprint, redirect, render_template, request, jsonify, send_f
 user_views = Blueprint('user_views', __name__, template_folder='../templates')
 
 from App.models import User, Player
-from App.controllers import ( create_user, SignUp, signupAction )
+from App.controllers import ( create_user,  )
 
 @user_views.route('/users', methods=['GET'])
 def get_user_page():
