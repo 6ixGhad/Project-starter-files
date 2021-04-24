@@ -11,10 +11,20 @@ api_views = Blueprint('api_views', __name__, template_folder='../templates')
 from App.controllers import ( create_user, SignUp, signupAction, LogIn, loginAction, logout, AddPlayer, addplayerAction, get_players, add_to_action, get_collection, edit, edit_action, delete_item )
 
 
-@api_views.route('/status', methods=['GET'])
+@api_views.route('/home', methods=['GET'])
 @login_required
 def get_api_docs():
-    return render_template('index.html')
+    return render_template('home.html')
+
+@api_views.route('/news', methods=['GET'])
+@login_required
+def get_api_news():
+    return render_template('news.html')
+
+@api_views.route('/league', methods=['GET'])
+@login_required
+def get_api_league():
+    return render_template('league.html')
 
 @api_views.route('/signup', methods=['GET'])
 def signup():

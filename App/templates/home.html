@@ -103,11 +103,6 @@ border-bottom: 1px solid black;
 .table-bg{
     background-color: rgba(255, 255, 255, 0.9);
 }  
-
-.center{
-    margin-left: auto;
-    margin-right: auto;
-}
       </style>
     <meta charset="UTF-8" />
     <title>My EPL</title>
@@ -127,11 +122,19 @@ border-bottom: 1px solid black;
         </div>
 
         <div class="nav-link-wrapper">
-          <a href="/home">Home</a>
+          <a href="/index.html">Home</a>
         </div>
 
         <div class="nav-link-wrapper">
           <a href="/news">News</a>
+        </div>
+
+        <div class="nav-link-wrapper">
+          <a href="/league">Premier League</a>
+        </div>
+            
+        <div class="nav-link-wrapper">
+          <a href="/players">Players</a>
         </div>
 
         <div class="nav-link-wrapper">
@@ -144,63 +147,28 @@ border-bottom: 1px solid black;
         </div>
       </div>
     </div>
+    <div class="">
 
+      <div class="content-wrapper">
+        <div class="site-items-wrapper">
+          <div class="site-item-wrapper">
+            <div
+              class="site-img-background"
+              style="background-image: url(https://cutewallpaper.org/21/premier-league-wallpaper/Free-download-New-Premier-League-identity-looks-to-talk-and-.jpg);"
+            ></div>
 
-{% block content %}
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="styles.css" />
-    <title>My EPL|News</title>
-  </head>
-  <style>
-    body {
-      background-image: url("https://c4.wallpaperflare.com/wallpaper/972/433/196/soccer-football-player-lionel-messi-wallpaper-preview.jpg");
-      background-repeat: no-repeat, repeat;
-      background-attachment: fixed;
-      background-size: cover;
-    }
-  </style>
-  {% if current_user.is_authenticated %}
-  <div class="container">
-<div class="row">
-      <table class="center">
-        <thead>
-          <tr>
-            <th>ID</th><th>First Name</th><th>Last Name</th><th>Assists</th><td></td><th>Goals</th><td></td><th>Red Cards</th><td></th><th>Yellow Cards</th><td></td><th>Add to collection</th><td></td>
-          </tr>
-        </thead>
-        <tbody>
-          {% for player in players %}
-            <tr style="color: black"> 
-              <td>{{player.id}}</td>
-              <td>{{player.first_name}}</td>
-              <td>{{player.second_name}}</td>
-              <td>{{player.assists}}</td>
-              <td></td>
-              <td>{{player.goals_scored}}</td>
-              <td></td>
-              <td>{{player.red_cards}}</td>
-              <td></td>
-              <td>{{player.yellow_cards}}</td>
-              <td></td>
-              <td>
-                <a class="waves-effect waves-light btn" href="/addtocollection/{{player.id}}"> +</a>
-              </td>
-            </tr>
-          {% endfor %}
-        <tbody>
-      </table>
+            <div class="img-text-wrapper">
+              <div class="logo-wrapper">
+                <a href="/league">
+                  <img src="https://png2.cleanpng.com/sh/82a11a3229a7e2be82233e63fa12411a/L0KzQYq3VcA5N6FtkJH0aYP2gLBuTf1wcJJyfdY2c3Hvcbm0jPl3baN1h9H1LXawc376kP9zfKQye95ycD3kgsW0hB9idF46e9Y7Y0izQIGAg8E0Pl82UKsDOUe4Q4K8Vcc0OWg7S6Q5M0G7PsH1h5==/kisspng-mohamed-salah-liverpool-f-c-sports-clip-art-goal-5cd2c80007c136.1898975315573176320318.png"/>
+                </a>
+              </div>
+              <div class="subtitle">
+                Premier League 2020 Standings and Accolades.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-        
-  </div>
-
-  {% endif %}
-{% endblock %}
+  </body>

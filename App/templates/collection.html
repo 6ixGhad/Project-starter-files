@@ -1,32 +1,219 @@
-{% extends "layout.html" %}
-{% block title %}My Collection{% endblock %}
-{% block page %} {{ current_user.username }}s Collection{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <style>
+     /*Master Style */
+body{
+    margin: 0px;
+}
 
-{{ super() }}
+ .container{
+    display: grid;
+    grid-template-columns: 1fr ;
+} 
+
+/* Nav styles*/
+.nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.left {
+    display: flex;
+}
+
+.nav-wrapper > .left > div {
+    margin-right: 20px;
+    font-size: 0.9em;
+    text-transform: uppercase;
+}
+
+.nav-link-wrapper{
+    height: 22px;
+    border-bottom: solid transparent;
+    transition: border-bottom 0.5s;
+}
+
+.nav-link-wrapper a {
+    color: grey;
+    text-decoration: none;
+    transition: color 0.5s;
+}
+
+.nav-link-wrapper:hover {
+border-bottom: 1px solid black;
+}
+
+.nav-link-wrapper a:hover {
+    color: black;
+}
+/* Page Styles */
+.site-items-wrapper{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+.site-item-wrapper{
+    position: relative;
+}
+
+.site-img-background {
+    height: 600px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.img-text-wrapper{
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.logo-wrapper img {
+    width: 40%;
+    margin-bottom: 20px;
+    
+}
+
+.img-text-wrapper .subtitle {
+    transition: 1s;
+    font-weight: 600;
+    color: transparent;
+}
+
+.img-text-wrapper:hover .subtitle {
+    font-weight: 600;
+    color: lightseagreen;
+}
+
+.img-darken {
+    transition: 1s;
+    filter: brightness(10%);
+}
+
+.table-bg{
+    background-color: rgba(255, 255, 255, 0.9);
+}  
+
+.center{
+    margin-left: auto;
+    margin-right: auto;
+}
+      </style>
+    <meta charset="UTF-8" />
+    <title>My EPL</title>
+    <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+    crossorigin="anonymous"
+  />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="nav-wrapper">
+      <div class="left">
+        <div class="nav-link-wrapper">
+          <a>My EPL</a>
+        </div>
+
+        <div class="nav-link-wrapper">
+          <a href="/home">Home</a>
+        </div>
+
+        <div class="nav-link-wrapper">
+          <a href="/news">News</a>
+        </div>
+
+        <div class="nav-link-wrapper">
+          <a href="/players">Players</a>
+        </div>
+      </div>
+      <div class="right">
+        <div class="nav-link-wrapper">
+          <a href="/logout">Logout</a>
+        </div>
+      </div>
+    </div>
+
 
 {% block content %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <title>My EPL|News</title>
+  </head>
+  <style>
+    body {
+      background-image: url("https://c4.wallpaperflare.com/wallpaper/972/433/196/soccer-football-player-lionel-messi-wallpaper-preview.jpg");
+      background-repeat: no-repeat, repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
   {% if current_user.is_authenticated %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <title>My EPL|News</title>
+  </head>
+  <style>
+    body {
+      background-image: url("https://c4.wallpaperflare.com/wallpaper/972/433/196/soccer-football-player-lionel-messi-wallpaper-preview.jpg");
+      background-repeat: no-repeat, repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
+
   <div class="container">
 <div class="row">
-      <table>
+      <table class="center">
         <thead>
           <tr>
-            <td>ID</td><td>First Name</td><td>Last Name</td><td>Assists</td><td>Goals</td><td>Red Cards</td><td>Yellow Cards</td><td>Add Player</td>
+            <th>ID</th><th>First Name</th><th>Last Name</th><th>Assists</th><td></td><th>Goals</th><td></td><th>Red Cards</th><td></th><th>Yellow Cards</th><td></td><th></th><td></td><th></th>
           </tr>
         </thead>
         <tbody>
           {% for player in players %}
-            <tr>
-              <td>{{player.id}}</td>
-              <td>{{player.first_name}}</td>
+            <tr style="color: black"> 
+              <td class="center">{{player.id}}</td>
+              <td class="center">{{player.first_name}}</td>
               <td>{{player.second_name}}</td>
               <td>{{player.assists}}</td>
+              <td></td>
               <td>{{player.goals_scored}}</td>
+              <td></td>
               <td>{{player.red_cards}}</td>
+              <td></td>
               <td>{{player.yellow_cards}}</td>
+              <td></td>
               <td>
                 <a class="waves-effect waves-light btn" href="/delete/{{player.id}}">Remove</a>
               </td>
+              <td></td>
               <td>
                 <a class="waves-effect waves-light btn" href="/update/{{player.id}}">Update</a>
               </td>

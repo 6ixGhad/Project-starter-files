@@ -25,7 +25,7 @@ class SignUp(FlaskForm):
 
 class LogIn(FlaskForm):
     username = StringField('username', validators=[InputRequired()])
-    password = PasswordField('New Password', validators=[InputRequired()])
+    password = PasswordField('Password', validators=[InputRequired()])
     submit = SubmitField('Login', render_kw={'class': 'btn waves-effect waves-light white-text'})
 
 class AddPlayer(FlaskForm):
@@ -80,7 +80,7 @@ def loginAction():
       if user and user.check_password(data['password']): # check credentials
         flash('Logged in successfully.') # send message to next page
         login_user(user) # login the user
-        return redirect(url_for('api_views.get_players1')) # redirect to main page if login successful
+        return redirect(url_for('api_views.get_api_docs')) # redirect to main page if login successful
   flash('Invalid credentials')
   return redirect(url_for('api_views.index'))
 
@@ -157,7 +157,7 @@ def delete_item(id):
     local_object = db.session.merge(collection)
     db.session.delete(local_object)
     db.session.commit()
-    flash('Todo Deleted!')
-    return redirect(url_for('api_views.get_players1'))
+    flash('Player removed from collection!')
+    return redirect(url_for('api_views.get_collection1'))
   flash('Unauthorized or player not found')
-  return redirect(url_for('api_views.get_players1')) 
+  return redirect(url_for('api_views.get_collection1')) 

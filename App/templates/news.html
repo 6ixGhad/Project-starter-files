@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <title>My EPL|News</title>
+  </head>
+  <style>
+    body {
+      background-image: url("https://cutewallpaper.org/21/premier-league-wallpaper/Free-download-New-Premier-League-identity-looks-to-talk-and-.jpg");
+      background-repeat: no-repeat, repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand">My EPL </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/home"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/league">Premier League</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/players">Players</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/mycollection">My collection</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <br />
+    <div class="container">
+      <div class="row">
+        <div class="input-group mb-3">
+          <input
+            id="spp"
+            type="text"
+            class="form-control"
+            placeholder="Enter Club"
+            aria-describedby="button-addon2"
+          />
+          <div class="input-group-append">
+            <button
+              onclick="myFunction()"
+              class="btn btn-primary"
+              type="button"
+              id="button-addon2"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+        <div id="myList" class="list-group list-group-flush"></div>
+      </div>
+    </div>
+  </body>
+
+  <sript src="/main.js" />
+  <script>
+    function fetchData(url) {
+      fetch(url).then(function (res) {
+        return res.json().then(function (data) {
+          console.log(data);
+          var listRef = document.getElementById("myList");
+          listRef.innerHTML = "";
+          for (a = 0; a < data.length; a++) {
+            var item = data[a];
+            var listitem = `
+            <a href="${item.link}" class="list-group-item list-group-item-action">
+                <h5 class="mb-1">${item.title}</h5>
+                 <div class="d-flex w-100 justify-content-between">
+                    <img src="${item.imgsrc}" alt="..." class="img-thumbnail">
+                 </div>
+                 <p class="mb-1">${item.shortdesc} </p>
+              </a>
+             `;
+            //istcontent=listcontent+ listitem;
+            listRef.innerHTML = listRef.innerHTML + listitem;
+          }
+        });
+      });
+    }
+
+    var url =
+      "https://secret-ocean-49799.herokuapp.com/https://skysportsapi.herokuapp.com/sky/getnews/football/v1.0/";
+    fetchData(url);
+    function myFunction() {
+      var inputRef = document.getElementById("spp");
+      var key = inputRef.value+'';
+      key=key.toLowerCase();
+      console.log(key);
+      var turl = `https://secret-ocean-49799.herokuapp.com/https://skysportsapi.herokuapp.com/sky/football/getteamnews/${key}/v1.0/`;
+      console.log(turl);
+    fetchData(turl);
+    }
+  </script>

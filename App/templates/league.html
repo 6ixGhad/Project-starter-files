@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <title>My EPL|League Table</title>
+  </head>
+  <style>
+    body {
+      background-image: url("https://cutewallpaper.org/21/premier-league-wallpaper/Free-download-New-Premier-League-identity-looks-to-talk-and-.jpg");
+      background-repeat: no-repeat, repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand">My EPL</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/home"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news">News</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/players">Players</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/mycollection">My Collection</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <br />
+    <div class="container">
+      <div class="row">
+        <div class="col-8">
+          <table
+            id="myTable"
+            class="table table-sm table-striped table-hover table-bg"
+          >
+            <thead class="thead-dark">
+              <tr>
+                <th>Position</th>
+                <th>Team</th>
+                <th>Played</th>
+                <th>Wins</th>
+                <th>Draws</th>
+                <th>Loses</th>
+                <th>Points</th>
+                <th>GD</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="col-4">
+          <table id="miTable" class="table table-sm table-striped table-hover table-bg">
+            <thead class="thead-dark"> 
+              <tr>
+                <th scope="col">Rank</th>
+                <th scope="col">Name</th>
+                <th scope="col">Games</th>
+                <th scope="col">Goals</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Harry Kane</td>
+                <td>28</td>
+                <td>19</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Mohammed Salah</td>
+                <td>29</td>
+                <td>18</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Bruno Fernandes</td>
+                <td>30</td>
+                <td>16</td>
+              </tr>
+            </tbody>
+              <thead class="thead-dark"> 
+                <tr>
+                  <th scope="col">Rank</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Games</th>
+                  <th scope="col">Assists</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Harry Kane</td>
+                  <td>29</td>
+                  <td>13</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Bruno Fernandes</td>
+                  <td>30</td>
+                  <td>11</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>Kevin De Brune</td>
+                  <td>24</td>
+                  <td>11</td>
+                </tr>
+              </tbody>
+              <thead class="thead-dark"> 
+                <tr>
+                  <th scope="col">Rank</th>
+                  <th scope="col">Team</th>
+                  <th scope="col">Games</th>
+                  <th scope="col">CleanSheets</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Manchester City</td>
+                  <td>31</td>
+                  <td>17</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Aston Villa</td>
+                  <td>29</td>
+                  <td>14</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>Chelsea</td>
+                  <td>30</td>
+                  <td>14</td>
+                </tr>
+              </tbody>
+            </thead> 
+        
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <sript src="/main.js" />
+  <script>
+    var url =
+    "https://secret-ocean-49799.herokuapp.com/https://livescore-api.com/api-client/leagues/table.json?key=dBM2QNLyrwBrQiu1&secret=pt5gLOmAv2sBek6rVTuMGfl8LWzBf4CF&league=25&season=8";
+    fetch(url).then(function (res) {
+      console.log("");
+      return res.json().then(function (data) {
+        var tabledata = data.data.table;
+        console.log(tabledata);
+
+        var tableRef = document
+          .getElementById("myTable")
+          .getElementsByTagName("tbody")[0];
+        for (i = 0; i < tabledata.length; i++) {
+          var item = tabledata[i];
+          var row = `
+        <tr>
+            <td>${item.rank}</td>
+            <td>${item.name}</td>
+            <td>${item.matches}</td>
+            <td>${item.won}</td>
+            <td>${item.drawn}</td>
+            <td>${item.lost}</td>
+            <td>${item.points}</td>
+            <td>${item.goal_diff}</td>
+        </tr>
+        `;
+          console.log(row);
+          var newRow = tableRef.insertRow(tableRef.rows.length);
+          newRow.innerHTML = row;
+        }
+      });
+    });
+    //fetches top scorer
+    fetch(url).then(function (res) {
+      console.log("HIIIII");
+      return res.json().then(function (data) {
+        console.log(data);
+      });
+    });
+  </script>
