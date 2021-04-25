@@ -28,7 +28,8 @@ def serve():
 def make_users():
     bob = User(username="bob", email="bob@mail.com")
     bob.set_password('bobpass')
-    db.session.add(bob)
+    local_object = db.session.merge(bob)
+    db.session.add(local_object) 
     db.session.commit()
     print("users created")
 

@@ -8,7 +8,7 @@ from flask_login import LoginManager, current_user, login_user, login_required
 import logging
 
 api_views = Blueprint('api_views', __name__, template_folder='../templates')
-from App.controllers import ( create_user, SignUp, signupAction, LogIn, loginAction, logout, AddPlayer, addplayerAction, get_players, add_to_action, get_collection, edit, edit_action, delete_item )
+from App.controllers import (  SignUp, signupAction, LogIn, loginAction, logout, AddPlayer, addplayerAction, get_players, add_to_action, get_collection, edit, edit_action, delete_item )
 
 
 @api_views.route('/home', methods=['GET'])
@@ -31,9 +31,6 @@ def signup():
   form = SignUp() # create form object
   return render_template('signup.html',  form=form) # pass form object to template
 
-#@api_views.route('/')
-#def index():
-#  return render_template('login.html')
 
 @api_views.route('/', methods=['GET'])
 def index():
@@ -59,7 +56,7 @@ def logout1():
 @api_views.route('/addplayer', methods=['GET'])
 @login_required
 def addplayer():
-  form = AddPlayer() # get the addToDo form
+  form = AddPlayer() 
   return render_template('addplayer.html', form=form) # pass the form to the template
 
 @api_views.route('/addplayer', methods=['POST'])
@@ -89,7 +86,7 @@ def get_collection1():
 
 @api_views.route('/update/<id>', methods=['GET'])
 @login_required
-def edit_todo(id): # get the todo id from url
+def edit_todo(id): 
   form = edit()
   return render_template('update.html', id=id, form=form)
 

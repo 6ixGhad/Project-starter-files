@@ -10,12 +10,6 @@ db=SQLAlchemy()
 
 from App.models import ( User, Player, Collection )
 
-
-def create_user(firstname, lastname, uwi_id, email, gender, dob):
-    # newuser = use()
-    return 'new user'
-
-
 class SignUp(FlaskForm):
     username = StringField('username', validators=[InputRequired()])
     email = EmailField('email', validators=[Email(), InputRequired()])
@@ -65,7 +59,8 @@ def signupAction():
     data = request.form # get data from form submission
     newuser = User(username=data['username'], email=data['email']) # create user object
     newuser.set_password(data['password']) # set password
-    db.session.add(newuser) # save new user
+    local_object = db.session.merge(newuser)
+    db.session.add(local_object) 
     db.session.commit()
     flash('Account Created!')# send message
     return redirect(url_for('api_views.index'))# redirect to login page
@@ -106,13 +101,12 @@ def get_players():
    if players is None:
        players = []
    form = AddPlayer()
-   return render_template('players.html', form=form, players=players) # pass the form and the user's todo objects to the template
+   return render_template('players.html', form=form, players=players) 
 
 def add_to_action(id):
   count = 1
   search = id
   row = Player.query.filter_by(id=search).first() # query  players
-  #myCollection= Collection(id=count, first_name=row.first_name, second_name=row.second_name)
   myCollection= Collection(id=id, collectionid= current_user.id, first_name=row.first_name, second_name=row.second_name, assists=row.assists, clean_sheets=row.clean_sheets, form=row.form, goals_conceded=row.goals_conceded, goals_scored=row.goals_scored ,minutes=row.minutes,penalties_saved=row.penalties_saved,red_cards=row.red_cards,yellow_cards=row.yellow_cards)
   db.session.add(myCollection)
   db.session.commit()
@@ -132,17 +126,16 @@ def edit_action(id):
   if form.validate_on_submit():
     data = request.form
     collection = Collection.query.filter_by(id=id).first() 
-    collection.assists = data['assists'] # update text
-    #player.assists = '0' # update text
-    collection.clean_sheets = data['clean_sheets'] # update text
-    collection.form = data['form'] # update text
-    collection.goals_conceded = data['goals_conceded'] # update text
-    collection.goals_scored = data['goals_scored'] # update text
-    collection.minutes = data['minutes'] # update text
-    collection.penalties_saved = data['penalties_saved'] # update text
-    collection.red_cards = data['red_cards'] # update text
-    collection.saves = data['saves'] # update text
-    collection.yellow_cards = data['yellow_cards'] # update text
+    collection.assists = data['assists'] 
+    collection.clean_sheets = data['clean_sheets'] 
+    collection.form = data['form'] 
+    collection.goals_conceded = data['goals_conceded'] 
+    collection.goals_scored = data['goals_scored'] 
+    collection.minutes = data['minutes'] 
+    collection.penalties_saved = data['penalties_saved'] 
+    collection.red_cards = data['red_cards'] 
+    collection.saves = data['saves'] 
+    collection.yellow_cards = data['yellow_cards'] 
     local_object = db.session.merge(collection)
     db.session.add(local_object) 
     db.session.commit()
@@ -152,7 +145,7 @@ def edit_action(id):
   return redirect(url_for('api_views.get_players1'))
 
 def delete_item(id):
-  collection = Collection.query.filter_by(id=id).first() # query  todo
+  collection = Collection.query.filter_by(id=id).first() 
   if collection:
     local_object = db.session.merge(collection)
     db.session.delete(local_object)
